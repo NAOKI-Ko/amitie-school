@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
-use App\Http\Controllers\TaskController;
+use App\Http\Controllers\TodolistFormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,12 +16,16 @@ use App\Http\Controllers\TaskController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-// ホームページ
-Route::get('/home', [HomeController::class, 'index']);
-// アバウトページ
-Route::get('/about', [AboutController::class, 'index']);
-Route::get('/test', 'App\Http\Controllers\TestController@index');
-Route::resource('tasks', TaskController::class);
+// 一蘭
+Route::get('/', [TodolistFormController::class, 'index']);
+// 作成ページ
+Route::get('/create-page', [TodolistFormController::class, 'createPage']);
+// とうろく
+Route::post('/create', [TodolistFormController::class, 'create']);
+// とうろく
+Route::get('/edit-page/{id}', [TodolistFormController::class, 'editPage']);
+// とうろく
+Route::post('/edit', [TodolistFormController::class, 'edit']);
+
+Route::get('/delete-page/{id}', [TodolistFormController::class, 'deletePage']);
+Route::post('/delete/{id}', [TodolistFormController::class, 'delete']);
