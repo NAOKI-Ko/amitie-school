@@ -13,14 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('todos', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('task_name'); 
-            $table->text('task_description'); 
-            $table->string('assign_person_name'); 
-            $table->string('estimate_hour');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('todos')) {
+            Schema::create('todos', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('task_name'); 
+                $table->text('task_description'); 
+                $table->string('assign_person_name'); 
+                $table->string('estimate_hour');
+                $table->timestamps();
+            });
+        }
     }
 
 
